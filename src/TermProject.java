@@ -15,7 +15,8 @@ class func {
 	String FileName;
 	Scanner sc = new Scanner(System.in);
     File E_file = new File("c:\\Temp\\Error_File.txt");
-	static int CR = 1;							// 전역변수, 1 = Disable Run function, 2 = Enable Run function
+	static int CR = 1;							// 전역변수, 1 = Disable Run function, 0 = Enable Run function
+	static int CP = 1;                          // 전역변수, 1 = Disable Compile Error list function, 0 = Enable Compile Error list function
 	static int Error_count = 0;					// 누적된 에러
 	static int Start = 0;						// 에러 토큰
 	String Error_token[] = new String[1000];	// 에러 토큰들을 저장할 배열(최대 1000개)
@@ -41,6 +42,8 @@ void uploadJ() {									// 1.Java File Upload
 
 void Compile(){										// 2.Compile
 
+        if(FileName != null) {	                    // 파일이 업로드 되었는지 체크
+       
         String s = null;
         File file = new File(FileName);
         String path = file.getAbsolutePath();
@@ -64,8 +67,9 @@ void Compile(){										// 2.Compile
     		    		Error_count++;
     		    	}
     		    }
-				System.out.println(Error_count + "개의 에러 발생,컴파일 실패함ㅋ");
+				System.out.println(Error_count + " 개의 에러 발생 , - " + FileName + " 컴파일 실패함");
 				CR = 1;									// 업로드된 소스 코드에 컴파일 오류가 발생시, 전역변수 CR = 1 로 설정하여 Run function Disable
+				CP = 0;                                 // 업로드된 소스 코드에 컴파일 오류가 있을시, Compile Error file을 보는 기능 활성화
 				e.close();
 			} catch (FileNotFoundException e1) {
 				System.out.println("치명적 오류");
@@ -75,6 +79,11 @@ void Compile(){										// 2.Compile
         CR = 0;											// 전역변수 CR = 0으로 설정하여 Run function Enable
         System.out.println("컴파일 성공함!");
         }
+        
+        } else {
+        	System.out.println("파일이 업로드 되지 않았습니다.");
+        }
+        
     }
     	 
     	
@@ -127,12 +136,15 @@ void Reset(){																	// 4.Reset function
     	FileName = null;
     	System.out.println("초기화되었습니다.");
     	Error_count = 0;											// 누적 에러 수 초기화
-    	Start = 0;													// 추가 바람
+    	Start = 0;													// 에러 토큰 초기화
+        CP = 1;                                                     // 전역 변수 초기화
     }
     
 void Compile_E(){													// 5. Compile Error List
     	
     	FileReader r = null;
+    	
+    	if(CP != 1) {
 
     	try {
     		r = new FileReader("C:\\Temp\\Error_File.txt");
@@ -146,9 +158,18 @@ void Compile_E(){													// 5. Compile Error List
     	} catch(IOException e){
     		System.out.println("Error!");
     	}
+    	
+    	}
+    	else {
+    		
+    		System.out.println("파일을 컴파일 하지 않았거나 컴파일 에러가 존재하지 않습니다.");
+    		
+    	}
 }
 void Delete_File() {
+	
 	E_file.delete();
+	
 }
 
 } // function Class ended
