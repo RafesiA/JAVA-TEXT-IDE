@@ -1,3 +1,10 @@
+/* 
+ * cmd.exe를 사용해 java ..\TermProject 명령어로 실행해주세요.
+ */
+
+
+
+
 import java.io.*;
 import java.nio.file.Files;
 import java.util.Arrays;
