@@ -17,8 +17,8 @@ class func {
     File E_file = new File("c:\\Temp\\Error_File.txt");
 	static int CR = 1;							// 전역변수, 1 = Disable Run function, 2 = Enable Run function
 	static int Error_count = 0;					// 누적된 에러
-	static int Start = 0;						// 추가바람
-	String Error_token[] = new String[1000];	// 추가바람
+	static int Start = 0;						// 에러 토큰
+	String Error_token[] = new String[1000];	// 에러 토큰들을 저장할 배열(최대 1000개)
 	
 void Select(){ 										// Selection
         System.out.println();
