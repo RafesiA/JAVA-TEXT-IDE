@@ -140,6 +140,9 @@ void Compile_E(){													// 5. Compile Error List
     		System.out.println("Error!");
     	}
 }
+void Delete_File() {
+	E_file.delete();
+}
 
 } // function Class ended
     
@@ -169,6 +172,7 @@ public class TermProject {
                 fc.Compile_E();
                 continue;
             case 6:
+            	fc.Delete_File();
                 break;
             default:
                 System.out.println("Wrong number!");
