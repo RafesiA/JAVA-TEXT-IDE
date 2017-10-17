@@ -1,4 +1,4 @@
-
+//Compile Success Sample
 public class HW {
 	public static void main(String[] args) {
 		System.out.println("Hello! How are you!");
