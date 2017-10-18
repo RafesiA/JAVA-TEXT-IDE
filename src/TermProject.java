@@ -201,6 +201,7 @@ public class TermProject {
                 continue;
             case 6:
             	fc.Delete_File();
+            	System.out.println("The IDE has been shutdowned successfully");
                 break;
             default:
                 System.out.println("Wrong number!");
