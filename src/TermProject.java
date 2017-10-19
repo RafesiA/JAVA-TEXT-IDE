@@ -1,5 +1,5 @@
 /* 
- * cmd.exe를 사용해 java ..\TermProject 명령어로 실행해주세요.
+ * cmd.exe를 사용해 작업 디렉토리 설정 명령어(cd)로 TermProject.java 경로를 지정한 뒤에 컴파일한 후에 java TermProject 명령어로 실행해주세요.
  */
 
 
