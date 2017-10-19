@@ -86,9 +86,8 @@ void Compile(){										// 2.Compile
         } else {
         	System.out.println("파일이 업로드 되지 않았습니다.");
         }
-        }
-        else
-        {
+        
+        } else {
         	System.out.println("파일이 이미 컴파일되었거나, 해당 파일은 컴파일이 불가능합니다.");
         }
     }
