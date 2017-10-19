@@ -16,6 +16,7 @@ class func {
 	Scanner sc = new Scanner(System.in);
     File E_file = new File("c:\\Temp\\Error_File.txt");
 	static int CR = 1;							// 전역변수, 1 = Disable Run function, 0 = Enable Run function
+	static int CO = 1;                          // 전역변수, 0 = Disable Compile function, 1 = Enable Compile function
 	static int CP = 1;                          // 전역변수, 1 = Disable Compile Error list function, 0 = Enable Compile Error list function
 	static int Error_count = 0;					// 누적된 에러
 	static int Start = 0;						// 에러 토큰
@@ -41,7 +42,7 @@ void uploadJ() {									// 1.Java File Upload
     
 
 void Compile(){										// 2.Compile
-
+        if(CO == 1){
         if(FileName != null) {	                    // 파일이 업로드 되었는지 체크
        
         String s = null;
@@ -71,6 +72,7 @@ void Compile(){										// 2.Compile
 				CR = 1;									// 업로드된 소스 코드에 컴파일 오류가 발생시, 전역변수 CR = 1 로 설정하여 Run function Disable
 				CP = 0;                                 // 업로드된 소스 코드에 컴파일 오류가 있을시, Compile Error file을 보는 기능 활성화
 				e.close();
+				CO = 0;
 			} catch (FileNotFoundException e1) {
 				System.out.println("치명적 오류");
 			}
@@ -78,12 +80,17 @@ void Compile(){										// 2.Compile
         else if(E_file.exists() == false) {
         CR = 0;											// 전역변수 CR = 0으로 설정하여 Run function Enable
         System.out.println("컴파일 성공함!");
+        CO = 0;
         }
         
         } else {
         	System.out.println("파일이 업로드 되지 않았습니다.");
         }
-        
+        }
+        else
+        {
+        	System.out.println("파일이 이미 컴파일되었거나, 해당 파일은 컴파일이 불가능합니다.");
+        }
     }
     	 
     	
@@ -138,6 +145,7 @@ void Reset(){																	// 4.Reset function
     	Error_count = 0;											// 누적 에러 수 초기화
     	Start = 0;													// 에러 토큰 초기화
         CP = 1;                                                     // 전역 변수 초기화
+        CO = 1;                                                     // 전역 변수 초기화
     }
     
 void Compile_E(){													// 5. Compile Error List
