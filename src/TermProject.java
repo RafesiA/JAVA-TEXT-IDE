@@ -1,4 +1,4 @@
-/* 
+/*
  * cmd.exe를 사용해 작업 디렉토리 설정 명령어(cd)로 TermProject.java 경로를 지정한 뒤에 컴파일한 후에 java TermProject 명령어로 실행해주세요.
  */
 
@@ -21,7 +21,7 @@ class func {
 	static int Error_count = 0;					// 누적된 에러
 	static int Start = 0;						// 에러 토큰
 	String Error_token[] = new String[1000];	// 에러 토큰들을 저장할 배열(최대 1000개)
-	
+
 void Select(){ 										// Selection
         System.out.println();
         System.out.println("-------------------");
@@ -34,17 +34,16 @@ void Select(){ 										// Selection
         System.out.println("-------------------");
         System.out.print("Choice : ");
         }
-    
+
 void uploadJ() {									// 1.Java File Upload
     	System.out.print("Insert File name : ");
-    	FileName = sc.next(); 
+    	FileName = sc.next();
         }
-    
 
 void Compile(){										// 2.Compile
         if(CO == 1){
         if(FileName != null) {	                    // 파일이 업로드 되었는지 체크
-       
+
         String s = null;
         File file = new File(FileName);
         String path = file.getAbsolutePath();
@@ -76,24 +75,24 @@ void Compile(){										// 2.Compile
 			} catch (FileNotFoundException e1) {
 				System.out.println("치명적 오류");
 			}
-        } 
+        }
         else if(E_file.exists() == false) {
         CR = 0;											// 전역변수 CR = 0으로 설정하여 Run function Enable
         System.out.println("컴파일 성공함!");
         CO = 0;
         }
-        
+
         } else {
         	System.out.println("파일이 업로드 되지 않았습니다.");
         }
-        
+
         } else {
         	System.out.println("파일이 이미 컴파일되었거나, 해당 파일은 컴파일이 불가능합니다.");
         }
     }
-    	 
-    	
-    
+
+
+
 void Run() {											// 3.Run function
     	if(CR == 0) {									// 컴파일이 오류 없이 성공 했을 때
         String s;
@@ -103,7 +102,7 @@ void Run() {											// 3.Run function
     	if(pos > 0) {
     		fname = fname.substring(0, pos);
     	}
-    	
+
    	    try {
    	    	Process p = null;
    	    	List<String> cmds = Arrays.asList("java", fname);				// 명령 프롬프트 명령어 집합
@@ -113,17 +112,17 @@ void Run() {											// 3.Run function
    	    	BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
    	    	while ((s = stdOut.readLine()) != null) System.out.println(s);
    	    	while ((s = stdError.readLine()) != null) System.err.println(s);
-   	    	
+
    	    } catch (IOException e) {
    	      System.err.println("에러! 외부 명령 실행에 실패했습니다.\n" + e.getMessage());
      	}
-   	    
+
     	}
     	else {
     		System.out.println("컴파일 오류, 또는 파일 업로드가 되지 않았습니다.");				// 파일 업로드, 컴파일 오류가 생겼을 때 전역 변수 0
     	}
      }
-    
+
 void Reset(){																	// 4.Reset function
     	try {
             PrintWriter pw = new PrintWriter(E_file);
@@ -138,7 +137,7 @@ void Reset(){																	// 4.Reset function
     	} catch (IOException e) {
     		System.out.println("파일 삭제 실패");
     	}
-    	
+
     	FileName = null;
     	System.out.println("초기화되었습니다.");
     	Error_count = 0;											// 누적 에러 수 초기화
@@ -146,11 +145,11 @@ void Reset(){																	// 4.Reset function
         CP = 1;                                                     // 전역 변수 초기화
         CO = 1;                                                     // 전역 변수 초기화
     }
-    
+
 void Compile_E(){													// 5. Compile Error List
-    	
+
     	FileReader r = null;
-    	
+
     	if(CP != 1) {
 
     	try {
@@ -159,28 +158,28 @@ void Compile_E(){													// 5. Compile Error List
     		while((c = r.read()) != -1) {
     			System.out.print((char)c);
     		}
-    		
+
     		r.close();
-    		
+
     	} catch(IOException e){
     		System.out.println("Error!");
     	}
-    	
+
     	}
     	else {
-    		
+
     		System.out.println("파일을 컴파일 하지 않았거나 컴파일 에러가 존재하지 않습니다.");
-    		
+
     	}
 }
 void Delete_File() {
-	
+
 	E_file.delete();
-	
+
 }
 
 } // function Class ended
-    
+
 
 public class TermProject {
     public static void main(String[] args){
@@ -213,8 +212,8 @@ public class TermProject {
             default:
                 System.out.println("Wrong number!");
                 continue;
-            } 
-            
+            }
+
             break;
         }
     }
