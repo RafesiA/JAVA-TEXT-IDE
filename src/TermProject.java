@@ -20,6 +20,7 @@ class func {
 	static int CP = 1;                          // 전역변수, 1 = Disable Compile Error list function, 0 = Enable Compile Error list function
 	static int Error_count = 0;					// 누적된 에러
 	static int Start = 0;						// 에러 토큰
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 	String Error_token[] = new String[1000];	// 에러 토큰들을 저장할 배열(최대 1000개)
 
 void Select(){ 										// Selection
@@ -53,6 +54,7 @@ void Compile(){										// 2.Compile
         		while ((s = stdError.readLine()) != null) {
         				FileWriter fw = new FileWriter(E_file, true);
         				fw.write(s);
+        				fw.write(LINE_SEPARATOR);
         				fw.flush();
         				fw.close();
         			}
